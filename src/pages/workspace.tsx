@@ -1,9 +1,8 @@
 import { MoleculeProvider, Workbench } from '@dtinsight/molecule';
 import '@dtinsight/molecule/esm/style/mo.css';
 import { useEffect } from 'react';
+import CustomModal from './components/customModal';
 import extensions from './extensions';
-
-(window as any).__DEVELOPMENT__ = false;
 
 export default () => {
   useEffect(() => {
@@ -18,8 +17,11 @@ export default () => {
   }, []);
 
   return (
-    <MoleculeProvider extensions={extensions}>
-      <Workbench />
-    </MoleculeProvider>
+    <>
+      <MoleculeProvider extensions={extensions}>
+        <Workbench />
+      </MoleculeProvider>
+      <CustomModal />
+    </>
   );
 };

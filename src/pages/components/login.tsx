@@ -3,7 +3,7 @@ import molecule from '@dtinsight/molecule';
 import { Modal, Form, Input, Button, message, Steps } from 'antd';
 import { CheckOutlined } from '@ant-design/icons';
 import ReactDOM from 'react-dom';
-import { terminalService } from '../extensions/terminal';
+// import { terminalService } from '../extensions/terminal';
 
 const { Step } = Steps;
 
@@ -48,7 +48,7 @@ function Login({ visible }: { visible: boolean }) {
               },
             ]);
             molecule.panel.setActive('terminal');
-            terminalService.setBasePath(repo);
+            // terminalService.setBasePath(repo);
             closeLogin();
           }
         }
@@ -101,8 +101,8 @@ function Login({ visible }: { visible: boolean }) {
       .then((res) => {
         if (res.success) {
           const { basePath } = res.data;
-          terminalService.setBasePath(basePath);
-          terminalService.createWebsocket(`git clone ${values.repository}`);
+          // terminalService.setBasePath(basePath);
+          // terminalService.createWebsocket(`git clone ${values.repository}`);
           closeLogin();
         }
       });
