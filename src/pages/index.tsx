@@ -160,19 +160,19 @@ export default function IndexPage() {
           <div>
             <Card title="Workspace">
               {repos.map((repo) => (
-                <Card.Grid
-                  key={repo.repo}
-                  className={styles.card}
-                  onClick={() => handleChooseRepo(repo)}
-                >
-                  {repo.repo}
-                  <br />
-                  {repo.loading && <LoadingOutlined />}
+                <Card.Grid key={repo.repo} className={styles.card}>
+                  <div onClick={() => handleChooseRepo(repo)}>
+                    {repo.repo}
+                    <br />
+                    {repo.loading && <LoadingOutlined />}
+                  </div>
                 </Card.Grid>
               ))}
-              <Card.Grid className={styles.card} onClick={handleOpenModal}>
-                Add Repo
-                <PlusOutlined />
+              <Card.Grid className={styles.card}>
+                <div onClick={handleOpenModal}>
+                  Add Repo
+                  <PlusOutlined />
+                </div>
               </Card.Grid>
             </Card>
           </div>

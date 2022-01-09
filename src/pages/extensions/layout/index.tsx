@@ -11,6 +11,7 @@ import { IExtensionService } from '@dtinsight/molecule/esm/services';
 import { history } from 'umi';
 import Icon from '@/pages/components/icon';
 import { mdiSourceBranch } from '@mdi/js';
+import { AUTH_ENUM } from '@/pages/components/share';
 
 export function getTreeData() {
   fetch('/api/mo/getRepoDir', { method: 'GET' })
@@ -59,14 +60,34 @@ function getBranch() {
     });
 }
 
+function getShareInfo(shareId: string) {
+  fetch(`/api/mo/getShare?shareId=${shareId}`, { method: 'GET' })
+    .then((res) => res.json())
+    .then((res) => {
+      if (res.success) {
+        const { key, auth } = res;
+        if (auth === AUTH_ENUM.READ_ONLY) {
+          // 设置全部的 editor 为只读
+        }
+      } else {
+        history.replace('/');
+      }
+    });
+}
+
 export default class LayoutExtension implements IExtension {
   id: string = 'layout';
   name: string = 'layout';
   activate(extensionCtx: IExtensionService): void {
-    // 获取 cookie 中的 repo 值
-    const repo = getCookie('repo');
-    if (!repo) {
-      history.replace('/');
+    // 若是通过分享链接打开页面
+    if (history.location.query?.share) {
+      getShareInfo(history.location.query.share as string);
+    } else {
+      // 获取 cookie 中的 repo 值
+      const repo = getCookie('repo');
+      if (!repo) {
+        history.replace('/');
+      }
     }
 
     getTreeData();

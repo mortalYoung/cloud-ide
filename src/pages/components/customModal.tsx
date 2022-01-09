@@ -51,7 +51,13 @@ export default ({
   });
 
   return (
-    <Modal visible={visible} onOk={handleOk} {...customConfig} {...props}>
+    <Modal
+      visible={visible}
+      onOk={handleOk}
+      destroyOnClose
+      {...customConfig}
+      {...props}
+    >
       {children}
     </Modal>
   );

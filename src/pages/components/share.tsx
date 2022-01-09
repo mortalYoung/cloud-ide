@@ -22,6 +22,11 @@ interface IRequestParams {
   auth: number;
 }
 
+export enum AUTH_ENUM {
+  READ_ONLY = 0,
+  READ_AND_WRITE = 1,
+}
+
 export default () => {
   const [form] = Form.useForm();
   const [loading, setLoading] = useState(false);
@@ -127,8 +132,8 @@ export default () => {
         </Form.Item>
         <Form.Item name="auth" label="权限">
           <Radio.Group disabled={editable}>
-            <Radio value={0}>只读权限</Radio>
-            <Radio value={1}>读写权限</Radio>
+            <Radio value={AUTH_ENUM.READ_ONLY}>只读权限</Radio>
+            <Radio value={AUTH_ENUM.READ_AND_WRITE}>读写权限</Radio>
           </Radio.Group>
         </Form.Item>
         <Form.Item
